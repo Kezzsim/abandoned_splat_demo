@@ -561,9 +561,9 @@ function createWorker(self) {
             if (types["scale_0"]) {
                 const qlen = Math.sqrt(
                     attrs.rot_0 ** 2 +
-                        attrs.rot_1 ** 2 +
-                        attrs.rot_2 ** 2 +
-                        attrs.rot_3 ** 2,
+                    attrs.rot_1 ** 2 +
+                    attrs.rot_2 ** 2 +
+                    attrs.rot_3 ** 2,
                 );
 
                 rot[0] = (attrs.rot_0 / qlen) * 128 + 128;
@@ -722,10 +722,7 @@ void main () {
 
 `.trim();
 
-let defaultViewMatrix = [
-    0.47, 0.04, 0.88, 0, -0.11, 0.99, 0.02, 0, -0.88, -0.11, 0.47, 0, 0.07,
-    0.03, 6.55, 1,
-];
+let defaultViewMatrix = [0.7, -0.21, 0.68, 0, -0.71, -0.2, 0.67, 0, -0.01, -0.96, -0.3, 0, -0.06, 0.01, 1.37, 1];
 let viewMatrix = defaultViewMatrix;
 async function main() {
     let carousel = true;
@@ -733,12 +730,11 @@ async function main() {
     try {
         viewMatrix = JSON.parse(decodeURIComponent(location.hash.slice(1)));
         carousel = false;
-    } catch (err) {}
+    } catch (err) { }
+    // Lock it down (for now)
     const url = new URL(
-        // "nike.splat",
-        // location.href,
-        params.get("url") || "train.splat",
-        "https://huggingface.co/cakewalk/splat-data/resolve/main/",
+        "building7_floor3_examroom_kppc.splat",
+        "https://aband.in/",
     );
     const req = await fetch(url, {
         mode: "cors", // no-cors, *cors, same-origin
@@ -856,17 +852,9 @@ async function main() {
     resize();
 
     worker.onmessage = (e) => {
-        if (e.data.buffer) {
-            splatData = new Uint8Array(e.data.buffer);
-            const blob = new Blob([splatData.buffer], {
-                type: "application/octet-stream",
-            });
-            const link = document.createElement("a");
-            link.download = "model.splat";
-            link.href = URL.createObjectURL(blob);
-            document.body.appendChild(link);
-            link.click();
-        } else if (e.data.texdata) {
+        // remove drag and drop .splat conversion, 
+        // if they want to do that they can go to the original repo.
+        if (e.data.texdata) {
             const { texdata, texwidth, texheight } = e.data;
             // console.log(texdata)
             gl.bindTexture(gl.TEXTURE_2D, texture);
@@ -912,7 +900,8 @@ async function main() {
         if (!activeKeys.includes(e.code)) activeKeys.push(e.code);
         if (/\d/.test(e.key)) {
             camera = cameras[parseInt(e.key)];
-            viewMatrix = getViewMatrix(camera);
+            // Disable the predefined camera views (for now)
+            // viewMatrix = getViewMatrix(camera);
         }
         if (e.code == "KeyV") {
             location.hash =
@@ -920,8 +909,6 @@ async function main() {
                 JSON.stringify(
                     viewMatrix.map((k) => Math.round(k * 100) / 100),
                 );
-        } else if (e.code === "KeyP") {
-            carousel = true;
         }
     });
     window.addEventListener("keyup", (e) => {
@@ -941,8 +928,8 @@ async function main() {
                 e.deltaMode == 1
                     ? lineHeight
                     : e.deltaMode == 2
-                    ? innerHeight
-                    : 1;
+                        ? innerHeight
+                        : 1;
             let inv = invert4(viewMatrix);
             if (e.shiftKey) {
                 inv = translate4(
@@ -1201,13 +1188,13 @@ async function main() {
                 inv = translate4(inv, 0, 0, -moveSpeed * gamepad.axes[1]);
                 carousel = false;
             }
-            if(gamepad.buttons[12].pressed || gamepad.buttons[13].pressed){
-                inv = translate4(inv, 0, -moveSpeed*(gamepad.buttons[12].pressed - gamepad.buttons[13].pressed), 0);
+            if (gamepad.buttons[12].pressed || gamepad.buttons[13].pressed) {
+                inv = translate4(inv, 0, -moveSpeed * (gamepad.buttons[12].pressed - gamepad.buttons[13].pressed), 0);
                 carousel = false;
             }
 
-            if(gamepad.buttons[14].pressed || gamepad.buttons[15].pressed){
-                inv = translate4(inv, -moveSpeed*(gamepad.buttons[14].pressed - gamepad.buttons[15].pressed), 0, 0);
+            if (gamepad.buttons[14].pressed || gamepad.buttons[15].pressed) {
+                inv = translate4(inv, -moveSpeed * (gamepad.buttons[14].pressed - gamepad.buttons[15].pressed), 0, 0);
                 carousel = false;
             }
 
@@ -1227,12 +1214,12 @@ async function main() {
                 carousel = false;
             }
             if (gamepad.buttons[4].pressed && !leftGamepadTrigger) {
-                camera = cameras[(cameras.indexOf(camera)+1)%cameras.length]
+                camera = cameras[(cameras.indexOf(camera) + 1) % cameras.length]
                 inv = invert4(getViewMatrix(camera));
                 carousel = false;
             }
             if (gamepad.buttons[5].pressed && !rightGamepadTrigger) {
-                camera = cameras[(cameras.indexOf(camera)+cameras.length-1)%cameras.length]
+                camera = cameras[(cameras.indexOf(camera) + cameras.length - 1) % cameras.length]
                 inv = invert4(getViewMatrix(camera));
                 carousel = false;
             }
@@ -1242,7 +1229,7 @@ async function main() {
                 isJumping = true;
                 carousel = false;
             }
-            if(gamepad.buttons[3].pressed){
+            if (gamepad.buttons[3].pressed) {
                 carousel = true;
             }
         }
@@ -1257,8 +1244,8 @@ async function main() {
                 activeKeys.includes("KeyJ")
                     ? -0.05
                     : activeKeys.includes("KeyL")
-                    ? 0.05
-                    : 0,
+                        ? 0.05
+                        : 0,
                 0,
                 1,
                 0,
@@ -1268,8 +1255,8 @@ async function main() {
                 activeKeys.includes("KeyI")
                     ? 0.05
                     : activeKeys.includes("KeyK")
-                    ? -0.05
-                    : 0,
+                        ? -0.05
+                        : 0,
                 1,
                 0,
                 0,
@@ -1279,12 +1266,13 @@ async function main() {
 
         viewMatrix = invert4(inv);
 
+        // tip: ANIMATION LOGIC
         if (carousel) {
             let inv = invert4(defaultViewMatrix);
 
             const t = Math.sin((Date.now() - start) / 5000);
-            inv = translate4(inv, 2.5 * t, 0, 6 * (1 - Math.cos(t)));
-            inv = rotate4(inv, -0.6 * t, 0, 1, 0);
+            //inv = translate4(inv, 2.5 * t, 0, 6 * (1 - Math.cos(t)));
+            inv = rotate4(inv, -0.2 * t, 0.5, 2, 4);
 
             viewMatrix = invert4(inv);
         }
@@ -1375,7 +1363,7 @@ async function main() {
         try {
             viewMatrix = JSON.parse(decodeURIComponent(location.hash.slice(1)));
             carousel = false;
-        } catch (err) {}
+        } catch (err) { }
     });
 
     const preventDefault = (e) => {
