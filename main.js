@@ -722,7 +722,7 @@ void main () {
 
 `.trim();
 
-let defaultViewMatrix = [0.7, -0.21, 0.68, 0, -0.71, -0.2, 0.67, 0, -0.01, -0.96, -0.3, 0, -0.06, 0.01, 1.37, 1];
+let defaultViewMatrix = [-0.23,0.03,0.97,0,-0.96,-0.1,-0.23,0,0.09,-1.01,0.05,0,-0.04,0.08,0.44,1];
 let viewMatrix = defaultViewMatrix;
 async function main() {
     let carousel = true;
@@ -1271,7 +1271,7 @@ async function main() {
             let inv = invert4(defaultViewMatrix);
 
             const t = Math.sin((Date.now() - start) / 5000);
-            //inv = translate4(inv, 2.5 * t, 0, 6 * (1 - Math.cos(t)));
+            inv = translate4(inv, 0.5 * t/2, 0, 1 * (0.5 - Math.cos(t)));
             inv = rotate4(inv, -0.2 * t, 0.5, 2, 4);
 
             viewMatrix = invert4(inv);

@@ -1,3 +1,4 @@
+// Shamelessly stolen from https://codepen.io/Mamboleoo/pen/obWGYr
 var canvas = document.querySelector("#logo");
 console.log(canvas);
 var ctx = canvas.getContext("2d"),
@@ -105,10 +106,7 @@ function initScene() {
 }
 
 function onMouseClick() {
-  radius++;
-  if (radius === 5) {
-    radius = 0;
-  }
+
 }
 
 function render(a) {

@@ -9,12 +9,14 @@
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Nova+Square&family=Texturina:ital,opsz@0,12..72;1,12..72&display=swap');
+
 		body {
 			overflow: hidden;
 			margin: 0;
 			height: 100vh;
 			width: 100vw;
-			font-family: sans-serif;
+			font-family: 'Texturina', serif;
 			background: black;
 			text-shadow: 0 0 3px black;
 		}
@@ -33,6 +35,10 @@
 
 		h3 {
 			margin: 5px 0;
+		}
+
+		h1 {
+			font-family: 'Nova Square', sans-serif;
 		}
 
 		p {
@@ -175,6 +181,22 @@
 			height: 100vh;
 		}
 
+		input{
+			width: 250px;
+			height: 40px;
+			line-height: 40px;
+			position: absolute;
+			bottom: 35px;
+			left: calc(50% - 125px);
+			background: none;
+			color: white;
+			font-size: 30px;
+			font-family: arial;
+			text-align: center;
+			border: 1px solid white;
+			background: rgba(255,255,255,0.2);
+		}
+
 		#instructions {
 			background: rgba(0, 0, 0, 0.6);
 			white-space: pre-wrap;
@@ -201,6 +223,7 @@
 	<div id="info">
 		<canvas id="logo"></canvas>
 		<h1 class="nohf" id="copy">abandoned.ai</h1>
+		<h1 class="nohf" >Test</h1>
 
 		<details>
 			<summary>Use mouse or arrow keys to navigate.</summary>
