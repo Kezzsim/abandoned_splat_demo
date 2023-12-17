@@ -29,6 +29,7 @@ function Particle(x, y) {
   this.friction = Math.random() * 0.05 + 0.94;
 
   this.color = colors[Math.floor(Math.random() * 6)];
+
 }
 
 Particle.prototype.render = function () {
@@ -48,6 +49,10 @@ Particle.prototype.render = function () {
   ctx.beginPath();
   ctx.arc(this.x, this.y, this.r, Math.PI * 2, false);
   ctx.fill();
+  // Outlinez
+  ctx.lineWidth = 4;
+  ctx.strokeStyle = "white";
+  ctx.stroke();
 
   var a = this.x - mouse.x;
   var b = this.y - mouse.y;
@@ -84,8 +89,8 @@ function initScene() {
   wh = canvas.height = window.innerHeight;
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  ctx.font = "bold " + (ww / 10) + "px sans-serif";
+  // This is where you set the title text font
+  ctx.font = "bold " + (ww / 10) + "px Nova Square";
   ctx.textAlign = "center";
   ctx.fillText(copy.innerText, ww / 2, wh / 2);
 
