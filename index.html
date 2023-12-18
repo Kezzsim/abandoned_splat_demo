@@ -8,6 +8,8 @@
 		content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+	<!-- TODO: convert to actual application-->
+	<!-- <link rel="manifest" href="/manifest.json"> -->
 	<style>
 		@import url('https://fonts.googleapis.com/css2?family=Nova+Square&family=Texturina:ital,opsz@0,12..72;1,12..72&display=swap');
 
@@ -177,12 +179,12 @@
 
 		#logo {
 			filter: drop-shadow(0 0 6.75rem black) saturate(200%);
-			pointer-events:none;
+			pointer-events: none;
 			width: 100vw;
 			height: 100vh;
 		}
 
-		input{
+		input {
 			width: 250px;
 			height: 40px;
 			line-height: 40px;
@@ -195,7 +197,7 @@
 			font-family: arial;
 			text-align: center;
 			border: 1px solid white;
-			background: rgba(255,255,255,0.2);
+			background: rgba(255, 255, 255, 0.2);
 		}
 
 		#instructions {
@@ -291,7 +293,13 @@
 		<span id="fps"></span>
 	</div>
 	<script src="main.js"></script>
-	<script src="./title_animation.js"></script>
+	<!-- Only load the fancy title animation on desktop please -->
+	<script>
+		if (navigator.maxTouchPoints === 0) {
+			document.write('<script src="./title_animation.js"><\/script>');
+		}
+	</script>
+
 </body>
 
 </html>

@@ -1,6 +1,5 @@
 // Shamelessly stolen from https://codepen.io/Mamboleoo/pen/obWGYr
 var canvas = document.querySelector("#logo");
-console.log(canvas);
 var ctx = canvas.getContext("2d"),
   particles = [],
   amount = 0,
