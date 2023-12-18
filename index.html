@@ -178,6 +178,7 @@
 		}
 
 		#logo {
+			display: none;
 			filter: drop-shadow(0 0 6.75rem black) saturate(200%);
 			pointer-events: none;
 			width: 100vw;
@@ -296,7 +297,9 @@
 	<!-- Only load the fancy title animation on desktop please -->
 	<script>
 		if (navigator.maxTouchPoints === 0) {
-			document.write('<script src="./title_animation.js"><\/script>');
+				var logoCanvas = document.getElementById("logo");
+				logoCanvas.style.display = "block";
+				document.write('<script src="./title_animation.js"><\/script>');
 		}
 	</script>
 
