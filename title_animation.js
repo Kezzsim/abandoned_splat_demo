@@ -10,8 +10,8 @@ var colors = ["#00C774", "#009E5C", "#00EB89", "#007544", "#004D2D"];
 
 var copy = document.querySelector("#copy");
 
-var ww = canvas.width = window.innerWidth;
-var wh = canvas.height = window.innerHeight;
+var ww = canvas.width;
+var wh = canvas.height;
 
 function Particle(x, y) {
   this.x = Math.random() * ww;
@@ -109,10 +109,6 @@ function initScene() {
 
 }
 
-function onMouseClick() {
-
-}
-
 function render(a) {
   requestAnimationFrame(render);
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -121,11 +117,9 @@ function render(a) {
   }
 };
 
-copy.addEventListener("keyup", initScene);
 window.addEventListener("resize", initScene);
 window.addEventListener("mousemove", onMouseMove);
 window.addEventListener("touchmove", onTouchMove);
-window.addEventListener("click", onMouseClick);
 window.addEventListener("touchend", onTouchEnd);
 initScene();
 requestAnimationFrame(render);
