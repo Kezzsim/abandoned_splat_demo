@@ -1,8 +1,26 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
-<head>
-	<title>abandoned.ai - lost space preservation</title>
+<head itemscope itemtype="https://schema.org/WebPage">
+	<title>abandoned.ai - Never say goodbye</title>
+	<!-- Link Card Preview metadata -->
+	<meta name="description" content="A 3D Digital archive of abandoned spaces made using machine learning." />
+	<meta itemprop="name" content="abandoned.ai | Never say goodbye" />
+	<meta itemprop="description"
+		content="A 3D Digital archive of abandoned spaces made using machine learning. Explorable in the browser or Virtual Reality clients." />
+	<meta itemprop="image" content="/images/previews/square.png" />
+	<link rel="alternate" type="application/json+oembed" href="https://abandoned.ai/oembed_link.json"
+		title="abandoned.ai" />
+
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="https://abandoned.ai/">
+	<meta property="og:title" content="abandoned.ai | Never say goodbye">
+	<meta property="og:description"
+		content="A 3D Digital archive of abandoned spaces made using machine learning. Explorable in the browser or Virtual Reality clients.">
+	<meta property="og:image"
+		content="https://abandoned.ai/images/previews/square.png">
+
+	<!-- Performance and compatability metadata -->
 	<meta charset="utf-8" />
 	<meta name="viewport"
 		content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
@@ -270,7 +288,7 @@
 			</div>
 
 		</details>
-		
+
 	</div>
 
 	<div id="progress"></div>
@@ -299,9 +317,9 @@
 	<!-- Only load the fancy title animation on desktop please -->
 	<script>
 		if (navigator.maxTouchPoints === 0) {
-				var logoCanvas = document.getElementById("logo");
-				logoCanvas.style.display = "block";
-				document.write('<script src="./title_animation.js"><\/script>');
+			var logoCanvas = document.getElementById("logo");
+			logoCanvas.style.display = "block";
+			document.write('<script src="./title_animation.js"><\/script>');
 		}
 	</script>
 
